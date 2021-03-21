@@ -1,7 +1,7 @@
 .App {
   min-height: 100vh;
-  background-color: #232935;
+  background-color: var(--siteBackground);
   color: #fff;
-  padding-top: 65px;
+  padding-top: 56px;
   padding-bottom: 70px;
 }
