@@ -8,6 +8,13 @@
   border-radius: 5px;
   cursor: pointer;
   position: relative;
+  transition: all 0.45s linear;
+  margin-top: 25px;
+}
+
+.card-container:hover {
+  box-shadow: 0 0 14px rgb(0, 255, 255);
+  transform: scale(1.06);
 }
 
 .image-area {
@@ -100,6 +107,7 @@
   .card-container {
     width: 300px;
     height: 545px;
+    margin: 15px 10px;
   }
 
   .image-area {

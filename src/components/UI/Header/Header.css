@@ -3,11 +3,11 @@
   height: 55px;
   cursor: pointer;
   position: fixed;
-  display: flex;
+  display: grid;
+  grid-template-columns: 50px 255px 1fr;
   align-items: center;
-
-  background-color: #1d222c;
-  font-family: 'Chau Philomene One', sans-serif;
+  background-color: var(--headerBackground);
+  font-family: var(--logoFont);
   box-shadow: 0 1px 5px black;
   color: #fff;
   z-index: 999;
@@ -20,25 +20,45 @@
 }
 
 .header h1 span {
-  color: yellow;
+  color: var(--logoYellow);
   font-size: 2.5rem;
   text-shadow: 1px 1px 2px black;
 }
 
 .logo {
   display: flex;
-  margin-left: 15px;
+  margin-left: 10px;
   margin-right: -5px;
-}
-
-.logo span:first-child {
-  background-color: red;
-}
-
-.logo-line {
-  height: 34px;
-  width: 3px;
-  background-color: yellow;
-  margin: 2px;
+  width: 40px;
   transform: rotateZ(-10deg);
+}
+
+.logo img {
+  width: 100%;
+}
+
+.header-buttons {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 20px;
+}
+
+.scroll-up {
+  width: 40px;
+  height: 40px;
+  background-color: rgba(27, 27, 27, 0.514);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 15px var(--logoRed);
+  border: 1px solid var(--logoRed);
+}
+
+@media (max-width: 600px) {
+  .header h1 {
+    display: none;
+  }
 }
