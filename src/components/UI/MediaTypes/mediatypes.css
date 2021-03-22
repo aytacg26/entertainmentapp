@@ -1,0 +1,8 @@
+.media-types {
+  display: flex;
+  flex-flow: row nowrap;
+  height: 45px;
+  border-bottom: 1px solid #676767;
+  width: 90%;
+  padding: 5px;
+}

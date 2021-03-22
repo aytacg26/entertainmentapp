@@ -1,0 +1,22 @@
+.media-type-container {
+  width: max-content;
+  height: 25px;
+  padding: 5px 20px;
+  color: #fff;
+  margin: 2px 6px;
+  background-color: #2e3542;
+  box-shadow: 1px 1px 2px black;
+  font-size: 12.5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid black;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.media-type-container.selected {
+  box-shadow: 0 0 8px yellowgreen;
+  border: 1px solid yellowgreen;
+  color: yellowgreen;
+}
