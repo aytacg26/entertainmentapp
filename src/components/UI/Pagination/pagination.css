@@ -1,0 +1,25 @@
+.pagination-container {
+  margin: 15px auto;
+  width: 85%;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.MuiPaginationItem-root {
+  color: #fff !important;
+}
+
+.MuiPaginationItem-outlinedSecondary,
+.MuiPaginationItem-outlinedSecondary.Mui-selected {
+  box-shadow: 1px 1px 3px black;
+  margin: 0 5px !important;
+  border-radius: 10px !important;
+  font-size: 15px !important;
+}
+
+.MuiPaginationItem-outlinedSecondary.Mui-selected {
+  background-color: yellowgreen !important;
+  border: 1px solid yellowgreen !important;
+}
