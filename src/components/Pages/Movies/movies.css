@@ -1,3 +1,33 @@
 .page-title-area {
   background-image: url('../../../images/moviespage.jpg');
 }
+
+.filter-container {
+  height: max-content;
+  width: 93%;
+  background-color: var(--headerBackground);
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 65px;
+  box-shadow: 1px 1px 3px black;
+  border: 1px solid black;
+  border-radius: 8px;
+  padding: 5px;
+}
+
+.filters-area {
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (max-width: 650px) {
+  .filter-container {
+    width: 100vw;
+    border: none 0;
+    padding: 3px;
+    box-shadow: 1px 0px 2px black;
+    border-radius: 0;
+  }
+}
