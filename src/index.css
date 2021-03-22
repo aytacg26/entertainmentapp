@@ -26,6 +26,11 @@
   --logoRed: rgb(255, 42, 42);
   --logoFont: 'chau-philomene-italic', sans-serif;
   --logoFontReg: 'chau-philomene', sans-serif;
+  --siteBlue: #3f51b5;
+  --select-border: #777;
+  --select-focus: blue;
+  --select-arrow: var(--select-border);
+  --lighting: rgb(0, 255, 255);
 }
 .page-title-area {
   display: flex;
@@ -61,6 +66,13 @@
   box-shadow: 1px 1px 3px black;
   color: var(--logoYellow);
   font-family: var(--logoFont);
+}
+
+.page-cards-section {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  justify-content: center;
 }
 
 ::-webkit-scrollbar {
