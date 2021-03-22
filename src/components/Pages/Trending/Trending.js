@@ -4,24 +4,43 @@ import axios from 'axios';
 import './trending.css';
 import Loader from '../../UI/Loader/Loader';
 import PageTitleContainer from '../../UI/PageTitleContainer/PageTitleContainer';
+import Pagination from '../../UI/Pagination/Pagination';
+import MediaTypes from '../../UI/MediaTypes/MediaTypes';
 
+//Use Redux for Types, Pagination, Filtering (For filtering, instead of current page, we need to filter from 1000x20 trending media)
 const Trending = (props) => {
   const [trendingMovies, setTrendingMovies] = useState(null);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState('');
+  const [isMounted, setIsMounted] = useState(true);
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(0);
+  const [type, setType] = useState('all');
 
   const fetchTrending = async () => {
+    let numToUse = 100;
     const { data } = await axios.get(`
-    https://api.themoviedb.org/3/trending/all/week?api_key=${process.env.REACT_APP_API_KEY}`);
+    https://api.themoviedb.org/3/trending/${type}/week?api_key=${process.env.REACT_APP_API_KEY}&page=${page}&total_pages`);
 
     setTrendingMovies(data.results);
     setLoading(false);
-    console.log(data.results);
+
+    if (data.total_pages < 100) {
+      numToUse = data.total_pages;
+    }
+
+    setTotalPages(numToUse);
   };
 
   useEffect(() => {
-    fetchTrending();
-  }, []);
+    if (isMounted) {
+      fetchTrending();
+    }
+    return () => {
+      setIsMounted(false);
+    };
+    //eslint-disable-next-line
+  }, [isMounted, page]);
 
   const movies =
     trendingMovies !== null
@@ -63,9 +82,22 @@ const Trending = (props) => {
   //       </div>
   //     </div>
   //   );
+  const handlePage = (pageNum) => {
+    setPage(parseInt(pageNum));
+    setIsMounted(true);
+    window.scroll(0, 0);
+  };
+
+  const handleType = (data) => {
+    setType(data.type);
+    setPage(1);
+    setIsMounted(true);
+    window.scroll(0, 0);
+  };
 
   return (
     <PageTitleContainer title='Tranding'>
+      <MediaTypes getType={handleType} />
       <div className='trending'>
         {trendingMovies === null && loading ? (
           <Loader />
@@ -75,6 +107,7 @@ const Trending = (props) => {
           movies.map((movie) => <Card key={movie.id} movie={movie} />)
         )}
       </div>
+      <Pagination onChange={handlePage} count={totalPages} page={page} />
     </PageTitleContainer>
   );
 };
