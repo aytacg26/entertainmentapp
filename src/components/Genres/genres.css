@@ -1,0 +1,17 @@
+.genres-container {
+  padding: 5px;
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (max-width: 650px) {
+  .genres-container {
+    padding: 5px;
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    justify-content: flex-start;
+  }
+}
