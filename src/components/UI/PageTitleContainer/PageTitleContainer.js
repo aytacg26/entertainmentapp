@@ -1,6 +1,6 @@
 import React from 'react';
 
-const PageTitleContainer = ({ children, title }) => {
+const PageTitleContainer = ({ children, title, background }) => {
   return (
     <div className='page-container'>
       <div className='page-title-area'>
