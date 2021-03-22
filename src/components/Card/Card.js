@@ -16,7 +16,6 @@ const Card = ({ movie }) => {
     history.push(`/${movie.id}`);
   };
 
-  console.log(movie.media_type);
   return (
     <div className='card-container' onClick={handleClick}>
       <div className='image-area'>
@@ -53,16 +52,29 @@ const Card = ({ movie }) => {
             {getLanguage(movie.original_language)}
           </div>
         </div>
-        <div className='movie-info'>
+        {/* <div className='movie-info'>
           <div className='title'>Point</div>
           <div
             className='title-data'
             style={{ color: movie.vote_average >= 5 ? 'yellowgreen' : 'red' }}
           >{`${movie.vote_average} / 10`}</div>
-        </div>
+        </div> */}
       </div>
       <div className='movie_tv'>
         {movie.media_type === 'tv' ? 'TV Series' : 'Movie'}
+      </div>
+      <div
+        className='movie-point'
+        title={`${movie.title || movie.name} has an average point of ${
+          movie.vote_average
+        } out of 10`}
+      >
+        <span
+          className='point'
+          style={{
+            background: movie.vote_average >= 6 ? 'yellowgreen' : 'red',
+          }}
+        >{`${movie.vote_average}`}</span>
       </div>
       {movie.adult ? (
         <div className='adult'>

@@ -91,6 +91,31 @@
   box-shadow: -1px 0 2px black;
 }
 
+.movie-point {
+  position: absolute;
+  font-size: 11px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  height: 40px;
+  width: 40px;
+  bottom: 102px;
+  right: 2px;
+  cursor: help;
+  z-index: 10;
+}
+
+.point {
+  height: 30px;
+  width: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  box-shadow: 1px 1px 3px black;
+}
+
 .plus18 {
   width: 25px;
   height: 25px;
