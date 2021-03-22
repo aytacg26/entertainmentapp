@@ -98,13 +98,15 @@ const Trending = (props) => {
   return (
     <PageTitleContainer title='Tranding'>
       <MediaTypes getType={handleType} />
-      <div className='trending'>
+      <div className='page-cards-section'>
         {trendingMovies === null && loading ? (
           <Loader />
         ) : trendingMovies.length === 0 ? (
           <span>No Tranding Movie</span>
         ) : (
-          movies.map((movie) => <Card key={movie.id} movie={movie} />)
+          movies.map((movie) => (
+            <Card key={movie.id} movie={movie} showType={true} />
+          ))
         )}
       </div>
       <Pagination onChange={handlePage} count={totalPages} page={page} />
@@ -113,7 +115,3 @@ const Trending = (props) => {
 };
 
 export default Trending;
-
-/**
- *
- */

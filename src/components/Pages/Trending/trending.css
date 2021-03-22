@@ -9,13 +9,6 @@
   background-image: url('../../../images/Cinema_Banner.jpeg');
 }
 
-.trending {
-  display: flex;
-  flex-flow: row wrap;
-  align-items: center;
-  justify-content: center;
-}
-
 .filter-area {
   position: absolute;
   width: 100%;
