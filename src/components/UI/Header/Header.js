@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import './Header.css';
 import logo from '../../../images/EHSH.png';
-import useScroll from '../../../components/customHooks/useScroll';
+import useScroll from '../../../customHooks/useScroll';
 import EjectIcon from '@material-ui/icons/Eject';
 
 const Header = () => {
