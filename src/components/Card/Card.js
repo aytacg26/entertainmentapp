@@ -5,7 +5,7 @@ import { img_300, unavailable } from '../../config/config';
 import { useHistory } from 'react-router-dom';
 import './card.css';
 
-const Card = ({ movie }) => {
+const Card = ({ movie, showType }) => {
   const image = movie.poster_path
     ? `${img_300}/${movie.poster_path}`
     : unavailable;
@@ -52,30 +52,27 @@ const Card = ({ movie }) => {
             {getLanguage(movie.original_language)}
           </div>
         </div>
-        {/* <div className='movie-info'>
-          <div className='title'>Point</div>
-          <div
-            className='title-data'
-            style={{ color: movie.vote_average >= 5 ? 'yellowgreen' : 'red' }}
-          >{`${movie.vote_average} / 10`}</div>
-        </div> */}
       </div>
-      <div className='movie_tv'>
-        {movie.media_type === 'tv' ? 'TV Series' : 'Movie'}
-      </div>
-      <div
-        className='movie-point'
-        title={`${movie.title || movie.name} has an average point of ${
-          movie.vote_average
-        } out of 10`}
-      >
-        <span
-          className='point'
-          style={{
-            background: movie.vote_average >= 6 ? 'yellowgreen' : 'red',
-          }}
-        >{`${movie.vote_average}`}</span>
-      </div>
+      {showType ? (
+        <div className='movie_tv'>
+          {movie.media_type === 'tv' ? 'TV Series' : 'Movie'}
+        </div>
+      ) : null}
+      {movie.vote_average > 0 ? (
+        <div
+          className='movie-point'
+          title={`${movie.title || movie.name} has an average point of ${
+            movie.vote_average
+          } out of 10`}
+        >
+          <span
+            className='point'
+            style={{
+              background: movie.vote_average >= 6 ? 'yellowgreen' : 'red',
+            }}
+          >{`${movie.vote_average}`}</span>
+        </div>
+      ) : null}
       {movie.adult ? (
         <div className='adult'>
           <span className='plus18'>18+</span>

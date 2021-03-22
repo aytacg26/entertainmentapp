@@ -13,7 +13,7 @@
 }
 
 .card-container:hover {
-  box-shadow: 0 0 14px rgb(0, 255, 255);
+  box-shadow: 0 0 14px var(--lighting);
   transform: scale(1.06);
 }
 
@@ -100,7 +100,7 @@
   background-color: transparent;
   height: 40px;
   width: 40px;
-  bottom: 102px;
+  bottom: 110px;
   right: 2px;
   cursor: help;
   z-index: 10;
