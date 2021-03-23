@@ -59,7 +59,6 @@ const Trending = () => {
   }, [scrollData.y]);
 
   const handleType = (data) => {
-    console.log(data);
     setType(data.type);
     setFetchedPages([1]);
     setPage(1);
