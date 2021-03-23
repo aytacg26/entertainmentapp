@@ -22,11 +22,17 @@ const Movies = (props) => {
 
   // const [type, setType] = useState('all');
 
+  /**
+   * @TODO : Remove Pagination and change page number by scroll and add newly fetched movies to the existing ones
+   * @TODO : Add filtering from Language, Movie Year, Sorting according to Average Point, currently movie year and language is static
+   */
   const fetchMovies = async () => {
     const selectedGen = selectedGenres.map((selected) => selected.id).join(',');
 
     const { data } = await axios.get(`
-    https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=true&include_video=true&page=${page}&primary_release_year=2010&with_original_language=ar&with_genres=${selectedGen}`);
+    https://api.themoviedb.org/3/discover/movie?api_key=${
+      process.env.REACT_APP_API_KEY
+    }&language=en-US&sort_by=popularity.desc&include_adult=true&include_video=true&page=${page}&primary_release_year=2010&with_original_language=en&with_genres=${selectedGen}&vote_average.gte=${0}`);
 
     setMovies(data.results);
     setLoading(false);
