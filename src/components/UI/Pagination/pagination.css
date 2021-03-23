@@ -23,3 +23,15 @@
   background-color: yellowgreen !important;
   border: 1px solid yellowgreen !important;
 }
+
+@media (max-width: 650px) {
+  .pagination-container {
+    width: 100%;
+  }
+
+  .MuiPaginationItem-sizeLarge {
+    height: 35px !important;
+    width: 35px !important;
+    margin: 5px !important;
+  }
+}
