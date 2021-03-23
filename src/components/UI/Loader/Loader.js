@@ -14,13 +14,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function CircularIndeterminate() {
+const CircularIndeterminate = () => {
   const classes = useStyles();
 
   return (
     <div className={classes.root}>
-      {/* <CircularProgress /> */}
       <CircularProgress color='secondary' />
     </div>
   );
-}
+};
+
+export default CircularIndeterminate;
