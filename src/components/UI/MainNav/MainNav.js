@@ -76,6 +76,8 @@ const MainNav = () => {
           break;
       }
     }
+
+    //eslint-disable-next-line
   }, [value, history]);
 
   const handleIconClick = (val) => {
