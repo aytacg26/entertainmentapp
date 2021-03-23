@@ -1,7 +1,18 @@
 import React from 'react';
 import './dropdown.css';
+import PropTypes from 'prop-types';
 
-const DropDown = ({ options, dropwidth, dropheight, dropcolor, title }) => {
+const DropDown = ({
+  options,
+  textKey,
+  valueKey,
+  dropwidth,
+  dropheight,
+  dropcolor,
+  title,
+  onChange,
+  name,
+}) => {
   return (
     <div
       className='drop-down'
@@ -9,18 +20,29 @@ const DropDown = ({ options, dropwidth, dropheight, dropcolor, title }) => {
     >
       <label> {title}</label>
 
-      <select>
+      <select onChange={onChange} name={name}>
         {options.map((option, index) => (
           <option
-            value={option.value}
-            key={`${option.text}-${option.value}-${index}`}
+            value={option[valueKey]}
+            key={`${option[textKey]}-${option[valueKey]}-${index}`}
           >
-            {option.text}
+            {option[textKey]}
           </option>
         ))}
       </select>
     </div>
   );
+};
+
+DropDown.propTypes = {
+  options: PropTypes.array.isRequired,
+  textKey: PropTypes.string.isRequired,
+  valueKey: PropTypes.string.isRequired,
+  dropwidth: PropTypes.number,
+  dropheight: PropTypes.number,
+  title: PropTypes.string,
+  onChange: PropTypes.func.isRequired,
+  name: PropTypes.string,
 };
 
 export default DropDown;
