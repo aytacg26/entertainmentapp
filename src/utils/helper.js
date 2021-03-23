@@ -124,4 +124,253 @@ export const createDates = (start) => {
   return dates;
 };
 
-export const getLanguages = () => {};
+export const getLanguages = () => {
+  return [
+    {
+      name: 'Arabic ',
+      code: 'ar',
+    },
+    {
+      name: 'Azerbaijani ',
+      code: 'az',
+    },
+    {
+      name: 'Belarusian ',
+      code: 'be',
+    },
+    {
+      name: 'Bulgarian ',
+      code: 'bg',
+    },
+    {
+      name: 'Bosnian ',
+      code: 'bs',
+    },
+    {
+      name: 'Czech ',
+      code: 'cs',
+    },
+    {
+      name: 'German ',
+      code: 'de',
+    },
+    {
+      name: 'Greek ',
+      code: 'el',
+    },
+    {
+      name: 'English',
+      code: 'en',
+    },
+    {
+      name: 'Spanish ',
+      code: 'es',
+    },
+    {
+      name: 'Estonian ',
+      code: 'et',
+    },
+    {
+      name: 'Persian ',
+      code: 'fa',
+    },
+    {
+      name: 'Finnish ',
+      code: 'fi',
+    },
+    {
+      name: 'French ',
+      code: 'fr',
+    },
+    {
+      name: 'Irish ',
+      code: 'ga',
+    },
+    {
+      name: 'Hebrew ',
+      code: 'he',
+    },
+    {
+      name: 'Hindi ',
+      code: 'hi',
+    },
+    {
+      name: 'Hungarian ',
+      code: 'hu',
+    },
+    {
+      name: 'Armenian ',
+      code: 'hy',
+    },
+    {
+      name: 'Indonesian ',
+      code: 'id',
+    },
+    {
+      name: 'Icelandic ',
+      code: 'is',
+    },
+    {
+      name: 'Italian ',
+      code: 'it',
+    },
+    {
+      name: 'Japanese ',
+      code: 'ja',
+    },
+    {
+      name: 'Georgian ',
+      code: 'ka',
+    },
+    {
+      name: 'Kazakh ',
+      code: 'kk',
+    },
+    {
+      name: 'Korean ',
+      code: 'ko',
+    },
+    {
+      name: 'Kurdish ',
+      code: 'ku',
+    },
+    {
+      name: 'Kyrgyz ',
+      code: 'ky',
+    },
+    {
+      name: 'Lithuanian ',
+      code: 'lt',
+    },
+    {
+      name: 'Latvian ',
+      code: 'lv',
+    },
+    {
+      name: 'Macedonian ',
+      code: 'mk',
+    },
+    {
+      name: 'Mongolian ',
+      code: 'mn',
+    },
+    {
+      name: 'Nepali ',
+      code: 'ne',
+    },
+    {
+      name: 'Norwegian ',
+      code: 'no',
+    },
+    {
+      name: 'Panjabi ',
+      code: 'pa',
+    },
+    {
+      name: 'Polish ',
+      code: 'pl',
+    },
+    {
+      name: 'Portuguese ',
+      code: 'pt',
+    },
+    {
+      name: 'Romanian ',
+      code: 'ro',
+    },
+    {
+      name: 'Russian ',
+      code: 'ru',
+    },
+    {
+      name: 'Slovak ',
+      code: 'sk',
+    },
+    {
+      name: 'Serbian ',
+      code: 'sr',
+    },
+    {
+      name: 'Swedish ',
+      code: 'sv',
+    },
+    {
+      name: 'Thai ',
+      code: 'th',
+    },
+    {
+      name: 'Turkmen ',
+      code: 'tk',
+    },
+    {
+      name: 'Turkish',
+      code: 'tr',
+    },
+    {
+      name: 'Ukrainian ',
+      code: 'uk',
+    },
+    {
+      name: 'Urdu ',
+      code: 'ur',
+    },
+    {
+      name: 'Uzbek ',
+      code: 'uz',
+    },
+    {
+      name: 'Vietnamese ',
+      code: 'vi',
+    },
+    {
+      name: 'Yiddish ',
+      code: 'yi',
+    },
+    {
+      name: 'Chinese ',
+      code: 'zh',
+    },
+  ];
+};
+
+export const getSortBy = () => {
+  return [
+    {
+      name: 'Point 10-0',
+      value: 'vote_average.desc',
+    },
+    {
+      name: 'Point 0-10',
+      value: 'vote_average.asc',
+    },
+    {
+      name: 'Newest to Oldest',
+      value: 'release_date.desc',
+    },
+    {
+      name: 'Oldest to Newest',
+      value: 'release_date.asc',
+    },
+    {
+      name: 'Name (Z to A)',
+      value: 'original_title.desc',
+    },
+    {
+      name: 'Name (A to Z)',
+      value: 'original_title_asc',
+    },
+  ];
+};
+
+export const getPoints = () => {
+  const points = [{ name: 'All Movies', value: 0 }];
+
+  for (let i = 0; i < 10; i++) {
+    const pointObj = {};
+    pointObj.name = `Greater than   ${i}`;
+    pointObj.value = i + 1;
+    points.push(pointObj);
+  }
+
+  return points;
+};
