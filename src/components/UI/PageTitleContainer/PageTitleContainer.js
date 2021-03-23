@@ -1,6 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-const PageTitleContainer = ({ children, title, background }) => {
+const PageTitleContainer = ({ children, title }) => {
   return (
     <div className='page-container'>
       <div className='page-title-area'>
@@ -18,6 +19,11 @@ const PageTitleContainer = ({ children, title, background }) => {
       {children}
     </div>
   );
+};
+
+PageTitleContainer.propTypes = {
+  children: PropTypes.any,
+  title: PropTypes.string,
 };
 
 export default PageTitleContainer;
