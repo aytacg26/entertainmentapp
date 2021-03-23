@@ -10,8 +10,13 @@ const DropDown = ({ options, dropwidth, dropheight, dropcolor, title }) => {
       <label> {title}</label>
 
       <select>
-        {options.map((option) => (
-          <option value={option.value}>{option.text}</option>
+        {options.map((option, index) => (
+          <option
+            value={option.value}
+            key={`${option.text}-${option.value}-${index}`}
+          >
+            {option.text}
+          </option>
         ))}
       </select>
     </div>
