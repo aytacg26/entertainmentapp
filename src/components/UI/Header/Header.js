@@ -21,8 +21,7 @@ const Header = () => {
         <span style={{ color: 'red', fontSize: '1.3rem' }}>ub</span>
       </h1>
 
-      {scrollData.y >= pageScrollHeight - (screenHeight + 400) &&
-      pageScrollHeight - (screenHeight + 400) > 0 ? (
+      {scrollData.y >= pageScrollHeight / 5 ? (
         <div className='header-buttons'>
           <span
             onClick={() => window.scroll({ top: 0 })}
