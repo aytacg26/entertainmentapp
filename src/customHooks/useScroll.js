@@ -7,6 +7,7 @@ const useScroll = (element) => {
   const [pageScrollHeight, setPageScrollHeight] = useState(0);
 
   useEffect(() => {
+    window.scroll({ top: 0 });
     setScreenHeight(window.innerHeight);
   }, []);
 
@@ -19,7 +20,11 @@ const useScroll = (element) => {
     };
 
     if (element.current && !isAssigned) {
-      setPageScrollHeight(element.current.nextElementSibling.scrollHeight);
+      if (element.current.nextElementSibling) {
+        setPageScrollHeight(element.current.nextElementSibling.scrollHeight);
+      } else {
+        setPageScrollHeight(element.current.scrollHeight);
+      }
     }
 
     window.addEventListener('scroll', setter);
