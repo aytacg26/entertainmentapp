@@ -6,3 +6,11 @@
   width: 90%;
   padding: 5px;
 }
+
+@media (max-width: 650px) {
+  .media-types {
+    height: 50px;
+
+    width: 100%;
+  }
+}
