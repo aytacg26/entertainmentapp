@@ -1,41 +1,34 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { connect } from 'react-redux';
 import Card from '../../Card/Card';
-import axios from 'axios';
 import './trending.css';
 import Loader from '../../UI/Loader/Loader';
 import PageTitleContainer from '../../UI/PageTitleContainer/PageTitleContainer';
 import MediaTypes from '../../UI/MediaTypes/MediaTypes';
 import useScroll from '../../../customHooks/useScroll';
+import {
+  resetFetchedPages,
+  setPageNumber,
+  fetchTrending,
+} from '../../../redux/actions/trendingActions';
 
 //Use Redux for Types, Pagination, Filtering (For filtering, instead of current page, we need to filter from 1000x20 trending media)
-const Trending = () => {
-  const [trendingMovies, setTrendingMovies] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [page, setPage] = useState(1);
-  const [fetchedPages, setFetchedPages] = useState([]);
+const Trending = ({
+  page,
+  fetchedPages,
+  trendingMovies,
+  resetFetchedPages,
+  setPageNumber,
+  fetchTrending,
+  loading,
+}) => {
   const [type, setType] = useState('all');
   const target = useRef();
   const [scrollData, screenHeight, pageScrollHeight] = useScroll(target);
 
-  //It will be called every page change but page change will be done according to scroll and new data will be added to current data
-  const fetchTrending = async () => {
-    const { data } = await axios.get(`
-      https://api.themoviedb.org/3/trending/${type}/week?api_key=${process.env.REACT_APP_API_KEY}&page=${page}&total_pages`);
-
-    setFetchedPages([...fetchedPages.filter((fp) => fp !== page), page]);
-
-    if (trendingMovies) {
-      setTrendingMovies([...trendingMovies, ...data.results]);
-      setLoading(false);
-    } else {
-      setTrendingMovies(data.results);
-      setLoading(false);
-    }
-  };
-
   useEffect(() => {
     if (!fetchedPages.includes(page)) {
-      fetchTrending();
+      fetchTrending(page, type);
     }
 
     //eslint-disable-next-line
@@ -45,14 +38,14 @@ const Trending = () => {
     const pageNum = Math.ceil(
       (scrollData.y + (screenHeight - 300)) / pageScrollHeight
     );
-    console.log(pageNum);
+
     if (
       !fetchedPages.includes(pageNum) &&
       trendingMovies &&
       pageNum > 0 &&
       pageNum <= 5
     ) {
-      setPage(pageNum);
+      setPageNumber(pageNum);
     }
 
     //eslint-disable-next-line
@@ -60,8 +53,8 @@ const Trending = () => {
 
   const handleType = (data) => {
     setType(data.type);
-    setFetchedPages([1]);
-    setPage(1);
+    resetFetchedPages();
+    setPageNumber(1);
     window.scroll(0, 0);
   };
 
@@ -94,4 +87,17 @@ const Trending = () => {
   );
 };
 
-export default Trending;
+const mapStateToProps = (state) => ({
+  page: state.trending.page,
+  fetchedPages: state.trending.fetchedPages,
+  trendingMovies: state.trending.trendingMovies,
+  loading: state.trending.loading,
+});
+
+const mapDispatchToProps = {
+  resetFetchedPages,
+  setPageNumber,
+  fetchTrending,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Trending);
