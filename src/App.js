@@ -9,26 +9,30 @@ import Trending from './components/Pages/Trending/Trending';
 import Movies from './components/Pages/Movies/Movies';
 import Series from './components/Pages/Series/Series';
 import Search from './components/Pages/Search/Search';
+import store from './redux/store';
+import { Provider } from 'react-redux';
 
 const App = () => {
   return (
-    <Router>
-      <Fragment>
-        <Header />
-        <div className='App'>
-          <Container>
-            <Switch>
-              <Route path='/' component={Home} exact />
-              <Route path='/trending' component={Trending} />
-              <Route path='/movies' component={Movies} />
-              <Route path='/series' component={Series} />
-              <Route path='/search' component={Search} />
-            </Switch>
-          </Container>
-        </div>
-        <MainNav />
-      </Fragment>
-    </Router>
+    <Provider store={store}>
+      <Router>
+        <Fragment>
+          <Header />
+          <div className='App'>
+            <Container>
+              <Switch>
+                <Route path='/' component={Home} exact />
+                <Route path='/trending' component={Trending} />
+                <Route path='/movies' component={Movies} />
+                <Route path='/series' component={Series} />
+                <Route path='/search' component={Search} />
+              </Switch>
+            </Container>
+          </div>
+          <MainNav />
+        </Fragment>
+      </Router>
+    </Provider>
   );
 };
 
