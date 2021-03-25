@@ -36,13 +36,14 @@ const trendingReducer = (state = initialState, action) => {
 
   switch (type) {
     case SET_TRENDING:
+      console.log('SET TRENDING PAGE : ', payload.page);
       return {
         ...state,
         loading: false,
-        fetchedPages: [...state.fetchedPages, state.page],
+        fetchedPages: [...state.fetchedPages, payload.page],
         trendingMovies: state.trendingMovies
-          ? [...state.trendingMovies, ...payload]
-          : payload,
+          ? [...state.trendingMovies, ...payload.data]
+          : payload.data,
       };
 
     case RESET_FETCHED_PAGES:
