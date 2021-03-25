@@ -35,7 +35,7 @@ const useScroll = (element) => {
     };
 
     //eslint-disable-next-line
-  }, [scrollData]);
+  }, [scrollData.y]);
 
   return [scrollData, screenHeight, pageScrollHeight];
 };
