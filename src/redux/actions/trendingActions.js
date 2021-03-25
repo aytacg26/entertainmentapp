@@ -31,7 +31,7 @@ export const fetchTrending = (page, type) => {
         `https://api.themoviedb.org/3/trending/${type}/week?api_key=${process.env.REACT_APP_API_KEY}&page=${page}&total_pages`
       );
 
-      dispatch({ type: SET_TRENDING, payload: data.results });
+      dispatch({ type: SET_TRENDING, payload: { data: data.results, page } });
     } catch (error) {
       console.error(error);
       dispatch({ type: FETCH_ERROR, payload: error.response });
