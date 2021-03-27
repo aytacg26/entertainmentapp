@@ -13,20 +13,16 @@ export const SET_MOVIE_TYPE = 'SET_MOVIE_TYPE';
   */
 import {
   SET_TRENDING,
-  SET_PAGE_NUMBER,
   SET_MOVIE_TYPE,
-  SET_LOADING,
-  RESET_FETCHED_PAGES,
-  FETCH_ERROR,
+  SET_BOTTOM,
+  REMOVE_BOTTOM,
 } from '../actions/types';
 
 const initialState = {
   trendingMovies: null,
-  loading: true,
   page: 1,
-  fetchedPages: [],
   type: 'all',
-  error: null,
+  isBottom: false,
 };
 
 //setFetchedPages([...fetchedPages.filter((fp) => fp !== page), page]);
@@ -39,42 +35,31 @@ const trendingReducer = (state = initialState, action) => {
       console.log('SET TRENDING PAGE : ', payload.page);
       return {
         ...state,
-        loading: false,
-        fetchedPages: [...state.fetchedPages, payload.page],
+        page: payload.page,
         trendingMovies: state.trendingMovies
           ? [...state.trendingMovies, ...payload.data]
           : payload.data,
       };
 
-    case RESET_FETCHED_PAGES:
-      return {
-        ...state,
-        fetchedPages: [1],
-      };
-
-    case SET_PAGE_NUMBER:
-      return {
-        ...state,
-        page: payload,
-      };
-
+    //Movie Type seçildiğinde, kaçıncı sayfada olduğuna bakıp filtreleme yapacak ve o sayfadan devam etmesi sağlanacak...
     case SET_MOVIE_TYPE:
       return {
         ...state,
+        trendingMovies: [],
+        page: 1,
         type: payload,
       };
 
-    case SET_LOADING:
+    case SET_BOTTOM:
       return {
         ...state,
-        loading: true,
+        isBottom: true,
       };
 
-    case FETCH_ERROR:
+    case REMOVE_BOTTOM:
       return {
         ...state,
-        loading: false,
-        error: payload,
+        isBottom: false,
       };
 
     default:
