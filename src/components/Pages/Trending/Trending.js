@@ -25,6 +25,7 @@ const Trending = ({
   removeBottom,
   isBottom,
   error,
+  removeLoading,
 }) => {
   const target = useRef();
   useScrollListener(target, handleScroll);
@@ -40,6 +41,10 @@ const Trending = ({
 
     if (page > 1 && page <= 6 && isBottom) {
       fetchTrending(page, type);
+    }
+
+    if (page > 6) {
+      removeLoading();
     }
 
     return () => {
