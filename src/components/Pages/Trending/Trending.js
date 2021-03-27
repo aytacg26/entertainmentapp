@@ -1,103 +1,103 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useEffect, useRef, Fragment } from 'react';
 import { connect } from 'react-redux';
 import Card from '../../Card/Card';
 import './trending.css';
-import Loader from '../../UI/Loader/Loader';
 import PageTitleContainer from '../../UI/PageTitleContainer/PageTitleContainer';
 import MediaTypes from '../../UI/MediaTypes/MediaTypes';
-import useScroll from '../../../customHooks/useScroll';
+import useScrollListener from '../../../customHooks/useScrollListener';
 import {
-  resetFetchedPages,
-  setPageNumber,
   fetchTrending,
+  handleScroll,
+  removeBottom,
 } from '../../../redux/actions/trendingActions';
+import { setLoading, removeLoading } from '../../../redux/actions/utilActions';
+import CardLoader from '../../UI/CardLoader/CardLoader';
+import OnPageMessage from '../../UI/OnPageMessage/OnPageMessage';
 
 //Use Redux for Types, Pagination, Filtering (For filtering, instead of current page, we need to filter from 1000x20 trending media)
 const Trending = ({
   page,
-  fetchedPages,
+  type,
   trendingMovies,
-  resetFetchedPages,
-  setPageNumber,
   fetchTrending,
   loading,
+  handleScroll,
+  removeBottom,
+  isBottom,
+  error,
 }) => {
-  const [type, setType] = useState('all');
   const target = useRef();
-  const [scrollData, screenHeight, pageScrollHeight] = useScroll(target);
+  useScrollListener(target, handleScroll);
 
   useEffect(() => {
-    if (!fetchedPages.includes(page)) {
+    window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
+    if (page === 1) {
       fetchTrending(page, type);
     }
 
-    //eslint-disable-next-line
-  }, [page]);
-
-  useEffect(() => {
-    const pageNum = Math.ceil(
-      (scrollData.y + (screenHeight - 300)) / pageScrollHeight
-    );
-
-    if (
-      !fetchedPages.includes(pageNum) &&
-      trendingMovies &&
-      pageNum > 0 &&
-      pageNum <= 5
-    ) {
-      setPageNumber(pageNum);
+    if (page > 1 && page <= 6 && isBottom) {
+      fetchTrending(page, type);
     }
 
+    return () => {
+      removeBottom();
+    };
+
     //eslint-disable-next-line
-  }, [scrollData.y]);
+  }, [isBottom, type, page]);
 
-  const handleType = (data) => {
-    setType(data.type);
-    resetFetchedPages();
-    setPageNumber(1);
-    window.scroll(0, 0);
-  };
+  let movies = error ? null : <CardLoader />;
+  const pageMessage = !window.navigator.onLine
+    ? 'No Internet Connection...'
+    : 'No Trending Movie Found';
 
-  //Some of the move comes 2 times from server because they are trending in different weeks or there is something wrong in API
-  //we need to get distict data from all and present them (when we are updating the state, we have to compare previous data with new data and create a distict movies data)
-  const movies =
-    type === 'all'
-      ? trendingMovies
-      : trendingMovies.filter((movie) => movie.media_type === type);
+  if (trendingMovies && !error) {
+    movies =
+      trendingMovies.length === 0 && !loading ? (
+        <OnPageMessage message={pageMessage} />
+      ) : (
+        trendingMovies.map((movie, index) => (
+          <Card
+            key={`${movie.id}-${movie.media_type}-${index}`}
+            movie={movie}
+            showType={true}
+          />
+        ))
+      );
+  }
 
   return (
-    <PageTitleContainer title='Tranding'>
-      <MediaTypes getType={handleType} />
-      <div className='page-cards-section' ref={target}>
-        {trendingMovies === null && loading ? (
-          <Loader />
-        ) : trendingMovies.length === 0 ? (
-          <span>No Tranding Movie</span>
-        ) : (
-          movies.map((movie, index) => (
-            <Card
-              key={`${movie.id}-${movie.media_type}-${index}`}
-              movie={movie}
-              showType={true}
-            />
-          ))
-        )}
-      </div>
-    </PageTitleContainer>
+    <Fragment>
+      <PageTitleContainer title='Tranding'>
+        <MediaTypes />
+
+        <div className='page-cards-section' ref={target}>
+          {movies}
+          {loading ? <CardLoader /> : null}
+        </div>
+      </PageTitleContainer>
+    </Fragment>
   );
 };
 
 const mapStateToProps = (state) => ({
   page: state.trending.page,
-  fetchedPages: state.trending.fetchedPages,
   trendingMovies: state.trending.trendingMovies,
-  loading: state.trending.loading,
+  loading: state.message.loading,
+  isBottom: state.trending.isBottom,
+  error: state.message.message,
+  type: state.trending.type,
 });
 
 const mapDispatchToProps = {
-  resetFetchedPages,
-  setPageNumber,
   fetchTrending,
+  handleScroll,
+  removeBottom,
+  removeLoading,
+  setLoading,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Trending);
