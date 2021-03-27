@@ -1,0 +1,85 @@
+.modal-container {
+  width: 100vw;
+  height: 100vh;
+  z-index: 999;
+  position: fixed;
+  background: rgba(0, 0, 0, 0.4);
+
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  display: none;
+}
+
+.modal-container.active {
+  display: flex;
+}
+
+.message-container {
+  height: 180px;
+  width: 500px;
+  max-width: calc(100vw - 8px);
+  background: #fff;
+  box-shadow: 1px 1px 3px var(--logoYellow);
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 45px 1fr;
+  border-radius: 6px;
+  position: absolute;
+  top: -200px;
+  margin-top: 0;
+}
+
+.modal-container.active .message-container {
+  animation: animateMessage 0.35s ease-in-out 1 forwards;
+}
+
+.modal-header-info,
+.modal-header-error,
+.modal-header-question {
+  width: 100%;
+  color: #fff;
+  padding: 5px 5px 5px 10px;
+  display: flex;
+  align-items: center;
+  border-radius: 6px 6px 0 0;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.modal-header-info {
+  background: var(--siteBlue);
+}
+
+.modal-header-error {
+  background: var(--logoRed);
+}
+
+.modal-header-question {
+  background: var(--siteBackground);
+}
+
+.message-area {
+  padding: 10px;
+}
+
+.header-text {
+  margin-left: 5px;
+}
+
+@keyframes animateMessage {
+  0% {
+    top: -200px;
+    margin-top: 0;
+  }
+
+  50% {
+    top: 60%;
+    margin-top: -90px;
+  }
+
+  100% {
+    top: 50%;
+    margin-top: -90px;
+  }
+}
