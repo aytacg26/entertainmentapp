@@ -1,9 +1,20 @@
 import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { setType } from '../../../redux/actions/trendingActions';
+import { setLoading } from '../../../redux/actions/utilActions';
 import MediaType from './MediaType/MediaType';
 import './mediatypes.css';
 
-const MediaTypes = ({ getType }) => {
+const MediaTypes = () => {
   const [mediaTypes, setMediaTypes] = useState([]);
+
+  const dispatch = useDispatch();
+  const currentState = useSelector((state) => ({
+    movies: state.trending.trendingMovies,
+    page: state.trending.page,
+  }));
+
+  const { movies, page } = currentState;
 
   useEffect(() => {
     //I assume that it comes from database
@@ -28,6 +39,8 @@ const MediaTypes = ({ getType }) => {
         : { ...type, isSelected: false }
     );
 
+    dispatch(setType(data.type, movies, page));
+    dispatch(setLoading());
     setMediaTypes(newMediaTypes);
   };
 
@@ -43,7 +56,6 @@ const MediaTypes = ({ getType }) => {
               isActive={mediaType.isSelected}
               clicked={(data) => {
                 handleClick(data);
-                getType(data);
               }}
             />
           ))
